@@ -1,6 +1,5 @@
 package com.POC.UserService.Entities;
 
-import com.POC.Entities.Rating;
 import com.POC.UserService.DTO.RatingDto;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +24,6 @@ public class User {
     private String about ;
 
     @Transient
-    private List<Rating> rating ;
-
+    private List<RatingDto> rating ;
 
 }

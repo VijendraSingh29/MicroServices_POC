@@ -4,13 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
-//import org.springframework.data.annotation.Transient;
-//import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -26,5 +22,7 @@ public class Rating {
     private String userId;
     private String hotelId;
     private int rating ;
+    @Temporal(TemporalType.DATE)
+    private Date date ;
     private String feedback;
 }

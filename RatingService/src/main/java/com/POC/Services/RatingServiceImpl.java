@@ -6,6 +6,7 @@ import com.POC.Repository.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,6 +16,7 @@ public class RatingServiceImpl implements RatingService{
     RatingRepository ratingRepository ;
     @Override
     public Rating create(Rating rating) {
+        rating.setDate(new Date());
         rating.setRatingId(UUID.randomUUID().toString());
         return ratingRepository.save(rating) ;
     }

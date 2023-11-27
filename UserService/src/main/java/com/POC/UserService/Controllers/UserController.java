@@ -1,6 +1,5 @@
 package com.POC.UserService.Controllers;
 
-import com.POC.UserService.DTO.UserResponse;
 import com.POC.UserService.Entities.User;
 import com.POC.UserService.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
