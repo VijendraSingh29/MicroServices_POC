@@ -1,19 +1,21 @@
 package com.POC.UserService.Services.Impl;
 
-import com.POC.Entities.Rating;
 import com.POC.UserService.DTO.HotelDto;
 import com.POC.UserService.DTO.RatingDto;
+import com.POC.UserService.DTO.UserResponse;
 import com.POC.UserService.Entities.User;
 import com.POC.UserService.Exceptions.ResourceNotFoundException;
 import com.POC.UserService.Repositories.UserRepository;
 import com.POC.UserService.Services.UserService;
 import com.POC.UserService.feignClient.feignRatingService;
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -35,10 +37,19 @@ public class userServicesImpl implements UserService {
     private feignRatingService ratingService;
 
     @Override
-    public User saveUser(User user) {
+    public UserResponse saveUser(User user) {
         String randomUserId = UUID.randomUUID().toString();
         user.setUserId(randomUserId);
-        return userRepository.save(user);
+        User save = userRepository.save(user);
+        UserResponse userDTO = getMappingForUserResponse(user);
+        return userDTO;
+
+    }
+
+    private UserResponse getMappingForUserResponse(User user) {
+           ModelMapper modelMapper = new ModelMapper();
+        UserResponse userDTO = modelMapper.map(user, UserResponse.class);
+        return userDTO ;
     }
 
     @Override
@@ -77,6 +88,15 @@ public class userServicesImpl implements UserService {
         }
         user.setRating(Arrays.asList(ratingDataForUser));
         return user;
+    }
+
+    @Override
+    public FilterProvider getResponseFilter(String[] addFilters) {
+        SimpleBeanPropertyFilter theFilter = SimpleBeanPropertyFilter
+                .serializeAllExcept(addFilters);
+        FilterProvider filter = new SimpleFilterProvider()
+                .addFilter("myFilter", theFilter);
+        return filter;
     }
 
     RatingDto[] getAllRatingDataForUser(String userId) {
