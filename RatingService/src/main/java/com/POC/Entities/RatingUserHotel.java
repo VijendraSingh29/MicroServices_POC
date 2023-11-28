@@ -5,27 +5,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-//@Document("user_ratings")
-@Entity(name= "rating")
-@Table
-public class Rating {
+@Entity
+@Table(name = "Rating_User_Hotel")
+public class RatingUserHotel {
 
     @Id
     private String ratingId;
-    private int rating ;
-    @Temporal(TemporalType.DATE)
-    private Date date ;
-    private String feedback;
-
-    @Transient
     private String userId;
-    @Transient
     private String hotelId;
+
 }

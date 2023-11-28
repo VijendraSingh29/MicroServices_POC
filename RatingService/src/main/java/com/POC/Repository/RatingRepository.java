@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface RatingRepository extends JpaRepository<Rating, String> /*MongoRepository<Rating,String>*/ {
 //
-   List<Rating> findByUserId(String userId);
-   List<Rating> findByHotelId(String hotelId);
+/*   List<Rating> findByUserId(String userId);
+   List<Rating> findByHotelId(String hotelId);*/
 }
