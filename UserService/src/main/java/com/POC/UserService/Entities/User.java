@@ -23,7 +23,4 @@ public class User {
 
     private String about ;
 
-    @Transient
-    private List<RatingDto> rating ;
-
 }

@@ -1,14 +1,12 @@
 package com.POC.UserService.DTO;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-@JsonFilter("myFilter")
-public class UserResponse {
+public class UserResponseDTO  {
 
     private String userId;
 
@@ -21,8 +19,6 @@ public class UserResponse {
     @JsonProperty(value = "Info about User")
     private String about ;
 
-   /* @JsonProperty(value = "My All Ratings")
-    private List<RatingDto> rating ;*/
-   private List<HotelDto> rating ;
-
+    @JsonProperty(value = "My All Ratings")
+    private List<HotelDto> rating ;
 }

@@ -75,4 +75,9 @@ public class RatingServiceImpl implements RatingService{
         }
         return ratings ;
     }
+
+    @Override
+    public Rating getRatingsByRatingId(String ratingId) {
+        return ratingRepository.findById(ratingId).orElseThrow(()->new ResourceNotFoundException("Rating details not found in the databse by this id :"+ratingId));
+    }
 }
